@@ -51,10 +51,10 @@ class Input extends React.Component {
       classes,
       inputChange,
     } = this.props;
+    /**
+     * copy from https://material-ui.com/components/app-bar/
+     */
     return (
-      /**
-       * copy from https://material-ui.com/components/app-bar/
-       */
       <React.Fragment>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
