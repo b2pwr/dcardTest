@@ -36,11 +36,16 @@ class InfiniteScroll extends React.Component {
   callback = (entries, observer) => {
     const {
       loadMore,
+      isSearching,
+      nextPage,
+      lastPage,
       children,
     } = this.props;
     entries.forEach(entry => {
       if(entry.isIntersecting && children.props.children.length > 0) {
-        loadMore();
+        if (!isSearching && nextPage <= lastPage){
+          loadMore(nextPage);
+        }
         this.setState({
           isBottom: true,
         })

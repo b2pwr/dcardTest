@@ -8,6 +8,7 @@ const input = (state = { repos: [] }, action) => {
         keywords: action.keywords,
         repos: state.repos.concat(action.repos),
         nextPage: action.nextPage + 1,
+        lastPage: action.lastPage,
         isSearching: action.isSearching,
       };
     case 'GET_REPOS_FAILED':

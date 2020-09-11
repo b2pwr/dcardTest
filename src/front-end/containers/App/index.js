@@ -35,8 +35,9 @@ class App extends React.Component {
       keywords,
       repos,
       nextPage,
+      lastPage,
     } = this.props;
-    const debounceInput = debounce(inputChange, 2000);
+    const debounceInput = debounce(inputChange, 1000);
 
     return (
       <ThemeProvider theme={theme}>
@@ -44,11 +45,10 @@ class App extends React.Component {
         <AppBar inputChange={debounceInput} />
         {isSearching &&  <LinearProgress />}
         <InfiniteScroll
-          loadMore={() => {
-            if(!isSearching) {
-              loadMore(keywords, nextPage);
-            }
-          }}
+          loadMore={loadMore(keywords)}
+          isSearching={isSearching}
+          nextPage={nextPage}
+          lastPage={lastPage}
           spinner={<CircularProgress />}
         >
           <List component="nav">
@@ -77,6 +77,7 @@ const mapStateToProps = createStructuredSelector({
   keywords: Selectors.selectKeywords,
   repos: Selectors.selectRepos,
   nextPage: Selectors.selectNextPage,
+  lastPage: Selectors.selectLastPage,
   isSearching: Selectors.selectIsSearching,
   error: Selectors.selectError,
 });
@@ -86,7 +87,7 @@ const mapDispatchToProps = dispatch => {
     inputChange: (keywords, nextPage) => {
       dispatch({ type: 'INPUT_CHANGED', keywords, nextPage });
     },
-    loadMore: (keywords, nextPage) => {
+    loadMore: keywords => nextPage => {
       dispatch({ type: 'LOAD_MORE', keywords, nextPage });
     },
   }

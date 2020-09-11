@@ -18,6 +18,13 @@ export const selectNextPage = createSelector(
   },
 );
 
+export const selectLastPage = createSelector(
+  selectInput,
+  inputReducer => {
+    return inputReducer.lastPage || 1;
+  },
+);
+
 export const selectRepos = createSelector(
   selectInput,
   inputReducer => {

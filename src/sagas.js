@@ -17,7 +17,7 @@ function* searchRepo(action) {
     
     try {
       const data = yield call(axios, {
-        url: `${BASE_URL}?q=${keywords}&sort=stars&order=desc&page=${nextPage}`,
+        url: `${BASE_URL}?q=${keywords}&sort=stars&order=desc&per_page=50&page=${nextPage}`,
         method: "get"
       });
       yield put({
@@ -25,6 +25,7 @@ function* searchRepo(action) {
         keywords: action.keywords,
         repos: data.data.items,
         nextPage,
+        lastPage: data.headers.link ? data.headers.link.split(',').find(link => link.includes('rel="last"')).match(/page=(\d*)/)[1] : 1,
         isSearching: false,
       });
     } catch(error) {
