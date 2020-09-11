@@ -45,10 +45,9 @@ class App extends React.Component {
         <AppBar inputChange={debounceInput} />
         {isSearching &&  <LinearProgress />}
         <InfiniteScroll
-          loadMore={loadMore(keywords)}
+          loadMore={() => loadMore(keywords, nextPage)}
           isSearching={isSearching}
-          nextPage={nextPage}
-          lastPage={lastPage}
+          end={(nextPage > lastPage)}
           spinner={<CircularProgress />}
         >
           <List component="nav">
@@ -87,7 +86,7 @@ const mapDispatchToProps = dispatch => {
     inputChange: (keywords, nextPage) => {
       dispatch({ type: 'INPUT_CHANGED', keywords, nextPage });
     },
-    loadMore: keywords => nextPage => {
+    loadMore: (keywords, nextPage) => {
       dispatch({ type: 'LOAD_MORE', keywords, nextPage });
     },
   }
