@@ -1,12 +1,12 @@
 import React from 'react';
 import InputBase from '@material-ui/core/InputBase';
-import { withStyles, fade } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
 /**
  * copy from https://material-ui.com/components/app-bar/
  */
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -43,38 +43,33 @@ const styles = theme => ({
       width: '20ch',
     },
   },
-});
+}));
 
-class Input extends React.Component {
-  render() {
-    const {
-      classes,
-      inputChange,
-    } = this.props;
-    /**
-     * copy from https://material-ui.com/components/app-bar/
-     */
-    return (
-      <React.Fragment>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            onChange={(e) => {
-              inputChange(e.target.value, 1);
-            }}
-            placeholder="Search"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
+const Input = ({ inputChange }) => {
+  const classes = useStyles();
+  /**
+   * copy from https://material-ui.com/components/app-bar/
+   */
+  return (
+    <React.Fragment>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
         </div>
-      </React.Fragment>
-    );
-  }
+        <InputBase
+          onChange={(e) => {
+            inputChange(e.target.value, 1);
+          }}
+          placeholder="Search"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </div>
+    </React.Fragment>
+  );
 }
 
-export default withStyles(styles)(Input);
+export default Input;
