@@ -6,7 +6,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -50,22 +49,20 @@ class App extends React.Component {
           end={(nextPage > lastPage)}
           spinner={<CircularProgress />}
         >
-          <List component="nav">
-            {repos.map(repo => (
-              <ListItem
-                button
-                key={repo.id}
-                onClick={() => {
-                  window.open(repo.html_url, '_blank', 'noopener,resizable,scrollbars');
-                }
-              }>
-                <ListItemIcon>
-                  <Avatar alt={repo.name} src={repo.owner.avatar_url} />
-                </ListItemIcon>
-                <ListItemText primary={repo.full_name} secondary={repo.description} />
-              </ListItem>
-            ))}
-          </List>
+          {repos.map(repo => (
+            <ListItem
+              button
+              key={repo.id}
+              onClick={() => {
+                window.open(repo.html_url, '_blank', 'noreferrer=yes');
+              }
+            }>
+              <ListItemIcon>
+                <Avatar alt={repo.name} src={repo.owner.avatar_url} />
+              </ListItemIcon>
+              <ListItemText primary={repo.full_name} secondary={repo.description} />
+            </ListItem>
+          ))}
         </InfiniteScroll>
       </ThemeProvider>
     );

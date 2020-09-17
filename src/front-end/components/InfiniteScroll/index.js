@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
 
 const styles = theme => ({
   spinner: {
@@ -41,7 +42,7 @@ class InfiniteScroll extends React.Component {
       children,
     } = this.props;
     entries.forEach(entry => {
-      if(entry.isIntersecting && children.props.children.length > 0) {
+      if(entry.isIntersecting && children.length > 0) {
         if (!isSearching && !end){
           loadMore();
         }
@@ -67,11 +68,11 @@ class InfiniteScroll extends React.Component {
     } = this.state;
     return (
       <div>
-        <div>
+        <List component="nav">
           {children}
-        </div>
+        </List>
         <div className={classes.spinner}>
-          {isBottom && children.props.children.length > 0 && spinner }
+          {isBottom && children.length > 0 && spinner }
         </div>
         <div ref={this.observeRef} className="observe"></div>
       </div>
