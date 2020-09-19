@@ -1,3 +1,8 @@
+### Changelog
+
+- add e2e test with cypress.io.
+- rewrite with react hook.
+
 ### 概覽
 
 - 一個使用 github API 搜尋 repositories 的工具。
@@ -8,6 +13,10 @@
 
 執行 `yarn install`， 然後執行 `yarn start`。
 開啟瀏覽器瀏覽 [http://localhost:3000](http://localhost:3000)
+
+### 測試
+
+執行 `yarn cypress:open`，點選 input_and_scroll_spec.js。
 
 ### 更多細節
 
