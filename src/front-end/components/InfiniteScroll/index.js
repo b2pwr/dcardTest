@@ -46,7 +46,7 @@ const InfiniteScroll = ({ children, spinner, loadMore, isSearching, end }) => {
         {children}
       </List>
       <div className={classes.spinner}>
-        {isBottom && children.length > 0 && spinner }
+        {isSearching && isBottom && children.length > 0 && spinner }
       </div>
       <div ref={observeRef} className="observer"></div>
     </div>
