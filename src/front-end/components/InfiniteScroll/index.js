@@ -25,7 +25,7 @@ const InfiniteScroll = ({ children, spinner, loadMore, isSearching, end, error }
   useEffect(() => {
     const options = {
       root: null, // viewport
-      rootMargin: '0px 0px 300px 0px',
+      rootMargin: '2880px',
       threshold: 1.0,
     };
     const observer = new IntersectionObserver(
