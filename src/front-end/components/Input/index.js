@@ -58,7 +58,7 @@ const Input = ({ inputChange }) => {
         </div>
         <InputBase
           onChange={(e) => {
-            inputChange(e.target.value, 1);
+            inputChange(e.target.value);
           }}
           placeholder="Search"
           classes={{
