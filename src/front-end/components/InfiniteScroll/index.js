@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 
@@ -10,9 +10,8 @@ const useStyles = makeStyles({
   },
 });
 
-const InfiniteScroll = ({ children, spinner, loadMore, isSearching, end }) => {
+const InfiniteScroll = ({ children, spinner, loadMore, isSearching, end, error }) => {
   const classes = useStyles();
-  const [isBottom, setIsBottom] = useState(false);
   const observeRef = useRef(null);
 
   const callback = useCallback(([entry]) => {
@@ -20,9 +19,6 @@ const InfiniteScroll = ({ children, spinner, loadMore, isSearching, end }) => {
       if (!isSearching && !end) {
         loadMore();
       }
-      setIsBottom(true)
-    } else {
-      setIsBottom(false)
     }
   }, [children, isSearching, end, loadMore]);
   
@@ -45,8 +41,9 @@ const InfiniteScroll = ({ children, spinner, loadMore, isSearching, end }) => {
       <List component="nav">
         {children}
       </List>
+      {error && <div>{`😰 (${error})`}</div>}
       <div className={classes.spinner}>
-        {isSearching && isBottom && children.length > 0 && spinner }
+        {isSearching && children.length > 0 && spinner }
       </div>
       <div ref={observeRef} className="observer"></div>
     </div>

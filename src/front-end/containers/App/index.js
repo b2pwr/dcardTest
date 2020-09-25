@@ -44,11 +44,11 @@ const App = ({ dispatch }) => {
       <CssBaseline />
       <AppBar inputChange={debounceInput} />
       {isSearching &&  <LinearProgress />}
-      {error && <div>X(</div>}
       <InfiniteScroll
         loadMore={() => dispatch({ type: LOAD_MORE, keywords, nextPage })}
         isSearching={isSearching}
         end={(nextPage > lastPage)}
+        error={error}
         spinner={<CircularProgress />}
       >
         {repos.map(repo => (
